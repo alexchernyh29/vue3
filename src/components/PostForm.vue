@@ -2,23 +2,33 @@
     <div class="app">
       <form @submit.prevent>
           <h4>Создание поста</h4>
-          <input :value="post.title" @input="post.title=$event.target.value" class="input" type="text" placeholder="Название">
-          <input :value="post.body" @input="post.body=$event.target.value" class="input" type="text" placeholder="Описание">
-          <button class="btn">Создать</button>
+          <input v-model="post.title" class="input" type="text" placeholder="Название">
+          <input v-model="post.body" class="input" type="text" placeholder="Описание">
+          <button @click="createPost" class="btn">Создать</button>
       </form>
     </div>
 </template>
 
 <script>
     export default {
-        data() {
-          return {
-            post: {
-              title: '',
-              body: ''
-            }
+      data() {
+        return {
+          post: {
+            title: '',
+            body: ''
           }
         }
+      },
+      methods: {
+        createPost() {
+          this.post.id = '';
+          this.$emit('create', this.post);
+          this.post = {
+            title: '',
+            body: ''
+          }
+        }
+      }
     }
 </script>
 
