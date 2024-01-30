@@ -1,20 +1,32 @@
 <template>
-  <div>
-    <button @click="addLike">Like</button>
-    <button @click="addDislike">Dislike</button>
-    Работает!
-    <div>Количество лайков: <strong>{{ likes }}</strong></div>
-    <div>Количество дислайков: <strong>{{ dislikes }}</strong></div>
+  <div class="app">
+    <div>
+      <form>
+        <h4>Создание поста</h4>
+        <input class="input" type="text" placeholder="Название">
+        <input class="input" type="text" placeholder="Описание">
+        <button class="btn" @click="createPost">Создать</button>
+      </form>
+    </div>
+    <div class="post" v-for="post in posts" v-bind:key="post">
+      <div><strong>Название:</strong>{{ post.title }}</div>
+      <div><strong>Описание:</strong>{{ post.body }}</div>
+    </div>
   </div>
 
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      likes: 0,
-      dislikes: 0,
+      posts: [
+        {id: 1, title:'JavaScript', body:'Описание поста'},
+        {id: 2, title:'JavaScript 2', body:'Описание поста 2'},
+        {id: 3, title:'JavaScript 3', body:'Описание поста 3'},
+        {id: 4, title:'JavaScript 4', body:'Описание поста 4'},
+      ]
     }
   },
   methods: {
@@ -28,6 +40,36 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.post {
+  padding: 15px;
+  border: 2px solid teal;
+  margin-top: 15px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.app {
+  padding: 20px;
+}
+.input {
+  width: 100%;
+  border: 1px solid teal;
+  padding: 10px 15px;
+  margin-top: 15px;
+}
+.btn {
+  margin-top: 15px;
+  align-self: flex-end;
+  padding: 10px;
+  background: none;
+  color: teal;
+  border: 1px solid teal;
+}
 </style>
